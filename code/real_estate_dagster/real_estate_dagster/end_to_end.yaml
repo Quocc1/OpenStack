@@ -1,0 +1,40 @@
+resources:
+  dbt:
+    config:
+      bypass_cache: false
+      capture_logs: true
+      dbt_executable: 'dbt'
+      debug: false
+      ignore_handled_error: false
+      json_log_format: true
+      project_dir: /var/lib/app/dbt/bronze
+      target_path: 'target'
+      warn_error: false
+  trino:
+    config:
+      host: 'trino'
+      port: '8060'
+      user: 'trino'
+ops:
+  crawl_real_estate_website_op:
+    config:
+      output_file: '/var/lib/app/stage/houses.csv'
+  dbt_bronze_run_op:
+    config:
+      project_dir: /var/lib/app/dbt/bronze
+  dbt_bronze_test_doc_sources_op:
+    config:
+      project_dir: /var/lib/app/dbt/bronze
+  dbt_silver_run_op:
+    config:
+      project_dir: /var/lib/app/dbt/silver
+  dbt_silver_test_doc_sources_op:
+    config:
+      project_dir: /var/lib/app/dbt/silver
+  dbt_gold_run_op:
+    config:
+      project_dir: /var/lib/app/dbt/gold
+  dbt_gold_test_doc_sources_op:
+    config:
+      project_dir: /var/lib/app/dbt/gold
+  

@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: silver_refined_data
+    description: "Transformed real estate data in the silver layer"
+    columns:
+      - name: account_id
+        description: "The ID of the account"
+      - name: ad_id
+        description: "The ID of the ad"
+      - name: area
+        description: "The area of the ad"
+      - name: area_name
+        description: "The name of the area"
+      - name: category
+        description: "The category of the ad"
+      - name: category_name
+        description: "The name of the category"
+      - name: latitude
+        description: "The latitude coordinate of the ad"
+      - name: longitude
+        description: "The longitude coordinate of the ad"
+      - name: location
+        description: "The location of the ad"
+      - name: date
+        description: "The date of the listing"
+      - name: price
+        description: "The price of the ad"
+      - name: region_name
+        description: "The name of the region"
+      - name: rooms
+        description: "The number of rooms in the property"
+      - name: size
+        description: "The size of the property"
+      - name: type
+        description: "The type of the property"
+      - name: year
+        description: "The year of the listing"
+      - name: month
+        description: "The month of the listing"
+      - name: quarter
+        description: "The quarter of the listing"
+      - name: price_per_sqm
+        description: "The price per square meter"

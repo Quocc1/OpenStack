@@ -1,0 +1,8 @@
+/env
+/.docker
+/cube/.cubestore
+/code/logs
+/code/real_estate_dagster/real_estate_dagster_tests
+/code/real_estate_dagster/real_estate_dagster.egg-info
+/code/real_estate_dagster/tmpoixnmtsv
+/code/real_estate_dagster/tmptekkbe75

@@ -1,0 +1,21 @@
+SELECT
+  account_id,
+  ad_id,
+  area,
+  area_name,
+  category,
+  category_name,
+  latitude,
+  longitude,
+  location,
+  date,
+  price,
+  region_name,
+  rooms,
+  size,
+  type,
+  year,
+  month,
+  quarter,
+  price_per_sqm
+from warehouse.silver.silver_refined_data

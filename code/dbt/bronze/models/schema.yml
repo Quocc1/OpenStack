@@ -1,0 +1,51 @@
+version: 2
+
+models:
+  - name: bronze_raw_data
+    columns:
+      - name: account_id
+        description: "The ID of the account"
+      - name: account_name
+        description: "The name of the account"
+      - name: ad_id
+        description: "The ID of the ad"
+      - name: area
+        description: "The area of the ad"
+      - name: area_name
+        description: "The name of the area"
+      - name: area_v2
+        description: "Additional area information"
+      - name: body
+        description: "The body text of the ad"
+      - name: category
+        description: "The category of the ad"
+      - name: category_name
+        description: "The name of the category"
+      - name: image
+        description: "The image associated with the ad"
+      - name: latitude
+        description: "The latitude coordinate of the ad"
+      - name: longitude
+        description: "The longitude coordinate of the ad"
+      - name: location
+        description: "The location of the ad"
+      - name: list_id
+        description: "The ID of the ad listing"
+      - name: list_time
+        description: "The time the ad was listed"
+      - name: price
+        description: "The price of the ad"
+      - name: region_name
+        description: "The name of the region"
+      - name: rooms
+        description: "The number of rooms in the ad"
+      - name: size
+        description: "The size of the ad"
+      - name: street_name
+        description: "The name of the street"
+      - name: subject
+        description: "The subject of the ad"
+      - name: type
+        description: "The type of the ad"
+      - name: ward_name
+        description: "The name of the ward"

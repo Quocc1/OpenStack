@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: gold_analytics_data
+    description: "Table capturing real estate market advertises, including property sales and related metrics."
+    columns:
+      - name: sale_id
+        description: "Unique identifier for the sale"
+      - name: account_id
+        description: "Foreign key referencing dim_account"
+      - name: ad_id
+        description: "Unique identifier for the ad"
+      - name: area_id
+        description: "Foreign key referencing dim_area"
+      - name: category_id
+        description: "Foreign key referencing dim_category"
+      - name: sale_date
+        description: "Date of the sale"
+      - name: price
+        description: "Price of the sale"
+      - name: rooms
+        description: "Number of rooms"
+      - name: size
+        description: "Size of the property"
+      - name: type
+        description: "Type of the property"
+      - name: year
+        description: "Year of the sale"
+      - name: month
+        description: "Month of the sale"
+      - name: quarter
+        description: "Quarter of the sale"
+      - name: price_per_sqm
+        description: "Price per square meter"

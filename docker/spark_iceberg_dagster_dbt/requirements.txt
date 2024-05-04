@@ -1,0 +1,13 @@
+jupyter==1.0.0
+pandas==2.2.2
+pyspark==3.5.1
+beautifulsoup4==4.12.3
+requests==2.31.0
+dbt-core==1.7.14
+dbt-spark[PyHive]==1.7.1
+dbt-trino==1.7.1
+dagster==1.7.4
+dagster-dbt==0.23.4
+dagster-pyspark==0.23.4
+dagster-webserver==1.7.4
+trino==0.328.0

@@ -1,0 +1,82 @@
+[0m23:10:11.947736 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CDE5F5D1D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CDE5F48410>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CDE5FAA390>]}
+
+
+============================== 23:10:11.953807 | 70d92650-59cf-421d-967a-b3b402808b5d ==============================
+[0m23:10:11.953807 [info ] [MainThread]: Running with dbt=1.7.13
+[0m23:10:11.956351 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'debug': 'False', 'fail_fast': 'False', 'log_path': 'logs', 'profiles_dir': 'C:\\Users\\caobi\\.dbt', 'version_check': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'introspect': 'True', 'invocation_command': 'dbt init', 'target_path': 'None', 'log_format': 'default', 'send_anonymous_usage_stats': 'True'}
+[0m23:12:35.769550 [debug] [MainThread]: Starter project path: D:\Users\pc\Downloads\Random_Projects\DE\OpenStack\env\Lib\site-packages\dbt\include\starter_project
+[0m23:12:36.149433 [info ] [MainThread]: 
+Your new dbt project "bronze" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m23:12:36.152436 [info ] [MainThread]: Setting up your profile.
+[0m23:13:04.583271 [info ] [MainThread]: Profile bronze written to C:\Users\caobi\.dbt\profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m23:13:04.589217 [debug] [MainThread]: Command `dbt init` succeeded at 23:13:04.589217 after 172.78 seconds
+[0m23:13:04.592217 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CDDEF4CE90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CDDEF94890>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001CDDEF6A4D0>]}
+[0m23:13:04.594216 [debug] [MainThread]: Flushing usage events
+[0m17:58:45.900720 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001781FA26890>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001781F87C410>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001781F710410>]}
+
+
+============================== 17:58:45.916352 | 542fa6d1-2d72-4a1e-8191-5c4cd276b9b8 ==============================
+[0m17:58:45.916352 [info ] [MainThread]: Running with dbt=1.7.13
+[0m17:58:45.931979 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'debug': 'False', 'fail_fast': 'False', 'log_path': 'logs', 'profiles_dir': 'D:\\Users\\pc\\Downloads\\Random_Projects\\DE\\OpenStack\\code\\dbt', 'version_check': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'invocation_command': 'dbt init', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m17:58:53.251534 [debug] [MainThread]: Starter project path: D:\Users\pc\Downloads\Random_Projects\DE\OpenStack\env\Lib\site-packages\dbt\include\starter_project
+[0m17:58:53.380926 [info ] [MainThread]: 
+Your new dbt project "silver" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m17:58:53.383924 [info ] [MainThread]: Setting up your profile.
+[0m17:59:00.752411 [debug] [MainThread]: Command `dbt init` succeeded at 17:59:00.752411 after 14.97 seconds
+[0m17:59:00.752411 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000017818A5CF10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001781EE88310>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000017818A7A250>]}
+[0m17:59:00.767989 [debug] [MainThread]: Flushing usage events
+[0m18:08:06.995106 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000016B3D051190>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000016B3CE1FDD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000016B3D07A390>]}
+
+
+============================== 18:08:06.999771 | 47f8bb9b-2a3b-4510-afb8-256dc3f7f919 ==============================
+[0m18:08:06.999771 [info ] [MainThread]: Running with dbt=1.7.13
+[0m18:08:07.001776 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': 'D:\\Users\\pc\\Downloads\\Random_Projects\\DE\\OpenStack\\code\\dbt', 'version_check': 'True', 'debug': 'False', 'log_path': 'logs', 'fail_fast': 'False', 'warn_error': 'None', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'invocation_command': 'dbt init', 'introspect': 'True', 'log_format': 'default', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m18:08:09.466134 [debug] [MainThread]: Starter project path: D:\Users\pc\Downloads\Random_Projects\DE\OpenStack\env\Lib\site-packages\dbt\include\starter_project
+[0m18:08:09.573567 [info ] [MainThread]: 
+Your new dbt project "gold" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m18:08:09.576579 [info ] [MainThread]: Setting up your profile.
+[0m18:08:11.231421 [debug] [MainThread]: Command `dbt init` succeeded at 18:08:11.230850 after 4.34 seconds
+[0m18:08:11.232565 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000016B35F6CF10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000016B35FB4910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000016B35F8A250>]}
+[0m18:08:11.233760 [debug] [MainThread]: Flushing usage events

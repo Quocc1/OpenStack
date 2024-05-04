@@ -1,0 +1,4 @@
+ops:
+  crawl_real_estate_website_op:  
+    config: 
+      output_file: /var/lib/app/stage/houses.csv

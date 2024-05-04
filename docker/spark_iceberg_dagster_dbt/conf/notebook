@@ -1,0 +1,4 @@
+#!/bin/sh
+export PYSPARK_DRIVER_PYTHON=jupyter-notebook
+export PYSPARK_DRIVER_PYTHON_OPTS="--notebook-dir=/var/lib/app/notebooks --ip='*' --NotebookApp.token='' --NotebookApp.password='' --port=8888 --no-browser --allow-root"
+pyspark

@@ -121,8 +121,6 @@ services:
     build: ./docker/metabase
     hostname: metabase
     container_name: metabase
-    depends_on:
-      - cube
     volumes:
       - ./docker/metabase/conf:/conf
     ports:

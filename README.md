@@ -89,7 +89,7 @@ copy all the values in [end_to_end.yaml](https://github.com/Quocc1/OpenStack/blo
 
 ![architecture](/assets/architecture.png)
 
-The diagram illustrates the conceptual view of the streaming pipeline (from bottom to top).
+The diagram illustrates the conceptual view of the data pipeline (from bottom to top).
 
 1. Real estate advertisements are obtained through an API.
 2. The advertisements are then stored in Minio S3, leveraging Apache Iceberg for efficient data management.

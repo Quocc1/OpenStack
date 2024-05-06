@@ -6,29 +6,81 @@ models:
     columns:
       - name: sale_id
         description: "Unique identifier for the sale"
+        tests:
+          - not_null
       - name: account_id
         description: "Foreign key referencing dim_account"
+        tests:
+          - not_null
       - name: ad_id
         description: "Unique identifier for the ad"
-      - name: area_id
-        description: "Foreign key referencing dim_area"
-      - name: category_id
-        description: "Foreign key referencing dim_category"
-      - name: sale_date
-        description: "Date of the sale"
+        tests:
+          - not_null
+      - name: area
+        description: "The area of the ad"
+        tests:
+          - not_null
+      - name: area_name
+        description: "The name of the area"
+        tests:
+          - not_null
+      - name: category
+        description: "The category of the ad"
+        tests:
+          - not_null
+      - name: category_name
+        description: "The name of the category"
+        tests:
+          - not_null
+      - name: latitude
+        description: "The latitude coordinate of the ad"
+        tests:
+          - not_null
+      - name: longitude
+        description: "The longitude coordinate of the ad"
+        tests:
+          - not_null
+      - name: location
+        description: "The location of the ad"
+        tests:
+          - not_null
+      - name: date
+        description: "The date of the listing"
+        tests:
+          - not_null
       - name: price
-        description: "Price of the sale"
+        description: "The price of the ad"
+        tests:
+          - not_null
+      - name: region_name
+        description: "The name of the region"
+        tests:
+          - not_null
       - name: rooms
-        description: "Number of rooms"
+        description: "The number of rooms in the property"
+        tests:
+          - not_null
       - name: size
-        description: "Size of the property"
+        description: "The size of the property"
+        tests:
+          - not_null
       - name: type
-        description: "Type of the property"
+        description: "The type of the property"
+        tests:
+          - not_null
       - name: year
-        description: "Year of the sale"
+        description: "The year of the listing"
+        tests:
+          - not_null
       - name: month
-        description: "Month of the sale"
+        description: "The month of the listing"
+        tests:
+          - not_null
       - name: quarter
-        description: "Quarter of the sale"
+        description: "The quarter of the listing"
+        tests:
+          - not_null
       - name: price_per_sqm
-        description: "Price per square meter"
+        description: "The price per square meter"
+        tests:
+          - not_null

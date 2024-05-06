@@ -26,4 +26,29 @@ FROM (
   SELECT *, ROW_NUMBER() OVER (ORDER BY _c0) AS row_num
   FROM csv.`/var/lib/app/stage/houses.csv`
 ) AS df
-WHERE row_num > 1;
+WHERE row_num > 1
+AND NOT (
+    _c0 IS NULL OR
+    _c1 IS NULL OR
+    _c2 IS NULL OR
+    _c3 IS NULL OR
+    _c4 IS NULL OR
+    _c5 IS NULL OR
+    _c6 IS NULL OR
+    _c7 IS NULL OR
+    _c8 IS NULL OR
+    _c9 IS NULL OR
+    _c10 IS NULL OR
+    _c11 IS NULL OR
+    _c12 IS NULL OR
+    _c13 IS NULL OR
+    _c14 IS NULL OR
+    _c15 IS NULL OR
+    _c16 IS NULL OR
+    _c17 IS NULL OR
+    _c18 IS NULL OR
+    _c19 IS NULL OR
+    _c20 IS NULL OR
+    _c21 IS NULL OR
+    _c22 IS NULL
+);

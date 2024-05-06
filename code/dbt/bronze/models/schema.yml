@@ -3,49 +3,95 @@ version: 2
 models:
   - name: bronze_raw_data
     columns:
+      - name: id
+        description: "The ID of the sale"
+        tests:
+          - not_null
       - name: account_id
         description: "The ID of the account"
+        tests:
+          - not_null
       - name: account_name
         description: "The name of the account"
+        tests:
+          - not_null
       - name: ad_id
         description: "The ID of the ad"
+        tests:
+          - not_null
       - name: area
         description: "The area of the ad"
+        tests:
+          - not_null
       - name: area_name
         description: "The name of the area"
+        tests:
+          - not_null
       - name: area_v2
         description: "Additional area information"
-      - name: body
-        description: "The body text of the ad"
+        tests:
+          - not_null
       - name: category
         description: "The category of the ad"
+        tests:
+          - not_null
       - name: category_name
         description: "The name of the category"
+        tests:
+          - not_null
       - name: image
         description: "The image associated with the ad"
+        tests:
+          - not_null
       - name: latitude
         description: "The latitude coordinate of the ad"
+        tests:
+          - not_null
       - name: longitude
         description: "The longitude coordinate of the ad"
+        tests:
+          - not_null
       - name: location
         description: "The location of the ad"
+        tests:
+          - not_null
       - name: list_id
         description: "The ID of the ad listing"
+        tests:
+          - not_null
       - name: list_time
         description: "The time the ad was listed"
+        tests:
+          - not_null
       - name: price
         description: "The price of the ad"
+        tests:
+          - not_null
       - name: region_name
         description: "The name of the region"
+        tests:
+          - not_null
       - name: rooms
         description: "The number of rooms in the ad"
+        tests:
+          - not_null
       - name: size
         description: "The size of the ad"
+        tests:
+          - not_null
       - name: street_name
         description: "The name of the street"
+        tests:
+          - not_null
       - name: subject
         description: "The subject of the ad"
+        tests:
+          - not_null
       - name: type
         description: "The type of the ad"
+        tests:
+          - not_null
       - name: ward_name
         description: "The name of the ward"
+        tests:
+          - not_null

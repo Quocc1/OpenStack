@@ -1,4 +1,5 @@
 SELECT
+  sale_id,
   account_id,
   ad_id,
   area,

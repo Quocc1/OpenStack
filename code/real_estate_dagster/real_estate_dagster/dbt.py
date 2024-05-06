@@ -2,7 +2,6 @@ from dagster import job, op, OpExecutionContext, Field, String
 
 from dagster_dbt import dbt_cli_resource
 
-
 def _dbt_run(context: OpExecutionContext, project_dir: String):
     context.log.info(f"elt: executing dbt run with project_dir: '{project_dir}'")
     context.resources.dbt.cli("run", project_dir=project_dir)

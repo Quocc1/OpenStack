@@ -15,14 +15,14 @@ An end-to-end open-source data stack for crawling and visualizing real estate da
 4. [Architecture](#architecture)
    - [Purpose](#purpose)
 5. [Components of the Data Stack](#components-of-the-data-stack)
-   - [Data Crawling](#data-crawling): Requests, API Gateway
+   - [Data Crawling](#data-crawling): Requests
    - [Data Transformation](#data-transformation): DBT, Apache Spark, Trino
    - [Data Warehousing/Storage](#data-warehousing/storage): MinioS3, Iceberg, PostgreSQL
-   - [Data Visualization](#data-visualization): Metabase (Community Edition)
-   - [Project Orchestration](#project-orcstration): Dagster
-7. [Project Overview](#project-overview)
-8. [Visualization](#visualization)
-9. [Acknowledgements](#acknowledgements)
+   - [Data Visualization and Analysis](#data-visualization-and-analysis): Metabase, Jupyter Notebook
+   - [Project Orchestration](#project-orchestration): Dagster
+6. [Project Overview](#project-overview)
+7. [Visualization](#visualization)
+8. [Acknowledgements](#acknowledgements)
 
 ## Introduction
 
@@ -35,7 +35,7 @@ Below is a list of technologies used in this project:
 | Component | Description |  URL  |
 | --------- | ----------- | ----- |
 | [Docker](https://www.docker.com/) | Containerization |
-| [Spark](https://spark.apache.org/) | Big Data processing framework | http://localhost:8061 `Master` http://localhost:8062 `Worker` http://localhost:18080 `History` |
+| [Spark](https://spark.apache.org/) | Big Data processing framework | http://localhost:8061 `Master` <br> http://localhost:8062 `Worker` <br> http://localhost:18080 `History` |
 | [Jupyter Notebook](https://jupyter.org/) | Interactive computing and data analysis | http://localhost:8888 |
 | [Minio](https://min.io/) | Object storage service | http://localhost:9001 |
 | [Iceberg](https://iceberg.apache.org/) | Table format for large-scale data |
@@ -80,13 +80,13 @@ If you encounter issues running the Makefile on Windows, refer to [this Stack Ov
 
 The diagram illustrates the conceptual view of the streaming pipeline (from bottom to top).
 
-1. Real estate advertisements are obtained through an API Gateway.
+1. Real estate advertisements are obtained through an API.
 2. The advertisements are then stored in Minio S3, leveraging Apache Iceberg for efficient data management.
 3. The data undergoes transformation through each [medallion](https://www.databricks.com/glossary/medallion-architecture) stage: bronze, silver, and gold, ensuring quality and consistency.
 4. Gold standard data is stored in PostgreSQL for persistent storage.
-5. The data is visualized using Metabase for analysis and insights.
+6. Data is visualized with Metabase for analysis and insights, and Jupyter Notebook is utilized for machine learning.
 
-The orchestration of these steps is managed by Dagster, while data transformation is handled by DBT.
+**The orchestration of these steps is managed by Dagster, while data transformation is handled by DBT.**
 
 ### Purpose:
 
@@ -96,45 +96,52 @@ By leveraging this data stack, users can gain valuable insights into the dynamic
 
 (See details in the [Visualization](#visualization) section below)
 
+## Components of the Data Stack
+
+### Data Crawling
+
+### Data Transformation
+
+### Data Warehousing/Storage
+
+### Data Visualization and Analysis
+
+### Project Orchestration
+
+
 ## Project Overview
 
 ```
-Stream_Processing
+OpenStack/
 ├── assets/
 │   └── pictures
 ├── code/
-│   ├── generate_data/
-│   │   └── gen_data.py
-│   ├── process/
-│   │   └── insert_into_sink.sql
-│   ├── sink/
-│   │   └── checkout_attribution.sql
-│   ├── source/
-│   │   ├── checkouts.sql
-│   │   ├── clicks.sql
-│   │   ├── products.sql
-│   │   └── users.sql
-│   └── main.py
-├── container/
-│   ├── flink/
-│   │   ├── Dockerfile
-│   │   └── requirements.txt
-│   └── generate_data/
-│       ├── Dockerfile
-│       └── requirements.txt
+│   ├── dbt/
+│   │   ├── bronze/
+│   │   │   └── model/
+│   │   │       └── bronze_raw_data.sql
+│   │   ├── silver/
+│   │   │   └── model/
+│   │   │       └── silver_refined_data.sql
+│   │   └── gold/
+│   │       └── model/
+│   │           └── gold_analytics_data.sql
+│   └── real_estate_dagster/
+│       └── real_estate_dagster/
+│           ├── crawl.py
+│           ├── database.py
+│           ├── dbt.py
+│           ├── end_to_end.py
+│           └── ...
 ├── data/
-│   ├── Products.csv
-│   └── Users.csv
-├── grafana/
-│   └── provisioning/
-│       ├── dashboards/
-│       │   ├── dashboard.json
-│       │   └── dashboard.yml
-│       └── datasources/
-│           └── postgres.yml
-├── postgres/
-│   └── init.sql
-├── .gitignore
+│   ├── spark/
+│   │   └── notebook/Predict_Price_Real_Estate.ipynb
+│   └── stage/
+│       └── houses.csv
+├── docker/
+│   ├── metabase/
+│   ├── spark_iceberg_dagster_dbt/
+│   └── trino/
 ├── docker-compose.yaml
 ├── Makefile
 └── README.md
@@ -143,48 +150,54 @@ Stream_Processing
 ### Overview
 
 ```
-├── generate_data/
-│   └── gen_data.py
+real_estate_dagster/
+└── real_estate_dagster/
+   ├── crawl.py
+   ├── database.py
+   ├── dbt.py
+   ├── end_to_end.py
+   └── ...
 ```
 
-**gen_data.py**: Generates and populates data into Kafka topics "clicks" and "checkouts".
+**crawl.py**: A Dagster job responsible for retrieving data via an API and storing it into /var/lib/app/stage/houses.csv.
+
+**database.py**: A Dagster job utilized for initializing databases for Minio, Iceberg, and PostgreSQL.
+
+**dbt.py**: A Dagster job employed for executing DBT models.
+
+**end_to_end.py**: This file combines all Dagster jobs, including database.py, crawl.py, and dbt.py, to orchestrate an end-to-end data 
+pipeline.
 
 ```
-├── source/
-│   ├── checkouts.sql
-│   ├── clicks.sql
-│   ├── products.sql
-│   └── users.sql
+dbt/
+├── bronze/
+│   └── model/
+│       └── bronze_raw_data.sql
+├── silver/
+│   └── model/
+│       └── silver_refined_data.sql
+└── gold/
+   └── model/
+      └── gold_analytics_data.sql
 ```
 
-**checkouts.sql:** Defines source tables to retrieve data from Kafka checkouts topics, watermarks are set to "15 seconds".
+**bronze_raw_data.sql**: SQL model defining transformations for raw data in the bronze layer.
 
-**chicks.sql:** Defines source tables to retrieve data from Kafka clicks topics, watermarks are set to "15 seconds".
+**silver_refined_data.sql**: SQL model defining transformations for refined data in the silver layer.
 
-**products.sql** and **users.sql**: Define [temporary tables](https://www.freecodecamp.org/news/sql-temp-table-how-to-create-a-temporary-sql-table/#:~:text=A%20temporary%20SQL%20table%2C%20also,require%20a%20permanent%20storage%20solution.) for streaming joins.
-
-```
-├── sink/
-│   └── checkout_attribution.sql
-```
-
-**checkout_attribution.sql**: Define a sink table that stores the final result from joining the stream
+**gold_analytics_data.sql**: SQL model defining transformations for analytics-ready data in the gold layer.
 
 ```
-├── process/
-│   └── insert_into_sink.sql
+data/
+├── spark/
+│   └── notebook/Predict_Price_Real_Estate.ipynb
+└── stage/
+   └── houses.csv
 ```
 
-**insert_into_sink.sql**:
+**Predict_Price_Real_Estate.ipynb**: Jupyter Notebook containing code for predicting real estate prices using Spark.
 
-- Defines SQL script for processing data by joining stream data from Kafka topics "clicks" and "checkouts" within the last 1 hour.
-- Finally, results are written into the PostgreSQL.
-
-```
-│   └── main.py
-```
-
-**main.py**: Creates sources, sink, and executes data processing.
+**houses.csv**: CSV file containing staged real estate data.
 
 ## Visualization
 

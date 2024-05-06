@@ -81,11 +81,6 @@ def crawl_real_estate_website_op(context: OpExecutionContext, dependent_job=None
     # Check for null values in each column
     df = df.dropna()
 
-    null_values = df.isnull().sum()
-
-    context.log.info("Null values after drop all null value in each column:")
-    context.log.info(null_values)
-
     # Len of data
     context.log.info(f'Len of data: {len(df)}')
 

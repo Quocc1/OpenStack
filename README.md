@@ -113,7 +113,7 @@ By leveraging this data stack, users can gain valuable insights into the dynamic
 
 Data crawling represents the preliminary phase in which raw data is gathered from diverse sources. Within our infrastructure, we employ the following technology:
 
-   - Requests: This Python library streamlines the process of making HTTP requests, thereby enabling seamless retrieval of data from APIs and web pages.
+   - **Requests**: This Python library streamlines the process of making HTTP requests, thereby enabling seamless retrieval of data from APIs and web pages.
 
 API Endpoint: [gateway.chotot.com](https://gateway.chotot.com/v1/public/ad-listing?region_v213000&area_v2=13096&cg=1000&o=0&page=1&st=s,k&limit=20&key_param_included=true)
 
@@ -125,11 +125,11 @@ Here is an example response to a request:
 
 Data transformation involves processing and refining raw data into a structured format suitable for analysis. We leverage the following technologies for this purpose:
 
-   - DBT (Data Build Tool): DBT is utilized for orchestrating the transformation process, enabling the creation of data models and the execution of SQL transformations.
+   - **DBT** (Data Build Tool): DBT is utilized for orchestrating the transformation process, enabling the creation of data models and the execution of SQL transformations.
 
-   - Apache Spark: As a powerful distributed computing framework, Apache Spark assists in processing large-scale data efficiently, facilitating complex transformations and computations.
+   - **Apache Spark**: As a powerful distributed computing framework, Apache Spark assists in processing large-scale data efficiently, facilitating complex transformations and computations.
 
-   - Trino (formerly Presto): Trino serves as a distributed SQL query engine, enabling interactive analysis across various data sources.
+   - **Trino** (formerly Presto): Trino serves as a distributed SQL query engine, enabling interactive analysis across various data sources.
 
 Representation of Data Flow:
 
@@ -139,11 +139,11 @@ Representation of Data Flow:
 
 Data warehousing and storage form the foundation for storing and managing processed data. Our data stack incorporates the following technologies:
 
-   - MinioS3: MinioS3 provides object storage capabilities, offering a scalable and cost-effective solution for storing large volumes of data.
+   - **MinioS3**: MinioS3 provides object storage capabilities, offering a scalable and cost-effective solution for storing large volumes of data.
  
-   - Iceberg: Iceberg is utilized for managing structured data tables in cloud object stores efficiently, providing features like atomic commits and time travel.
+   - **Iceberg**: Iceberg is utilized for managing structured data tables in cloud object stores efficiently, providing features like atomic commits and time travel.
  
-   - PostgreSQL: PostgreSQL serves as our relational database management system, offering robust data storage and querying capabilities.
+   - **PostgreSQL**: PostgreSQL serves as our relational database management system, offering robust data storage and querying capabilities.
 
 Connect to PostgreSQL using DBeaver (username: `postgres`, password: `postgres`):
 
@@ -158,9 +158,9 @@ Connect to MinioS3 via [localhost:9001](http://localhost:9001) (username: `admin
 ### Data Visualization and Analysis
 Data visualization and analysis is paramount in aiding data exploration and decision-making processes. Our preferred tools for visualization and analysis are:
  
-   - Metabase (Community Edition): Metabase provides a user-friendly interface, facilitating the creation of interactive dashboards and visualizations. This empowers users to effortlessly derive insights from their data.
+   - **Metabase** (Community Edition): Metabase provides a user-friendly interface, facilitating the creation of interactive dashboards and visualizations. This empowers users to effortlessly derive insights from their data.
 
-   - Jupyter Notebook: Jupyter Notebook is another essential tool for data visualization and analysis. It allows users to create and share documents containing live code, equations, visualizations, and narrative text, providing a versatile environment for data exploration and experimentation.
+   - **Jupyter Notebook**: Jupyter Notebook is another essential tool for data visualization and analysis. It allows users to create and share documents containing live code, equations, visualizations, and narrative text, providing a versatile environment for data exploration and experimentation.
 
 Examples of machine learning in Jupyter Notebook:
 
@@ -169,7 +169,7 @@ Examples of machine learning in Jupyter Notebook:
 ### Project Orchestration
 Project orchestration involves coordinating and managing the various components and processes within our data pipeline. We employ:
 
-   - Dagster: Dagster serves as our project orchestration tool, enabling the definition, scheduling, and monitoring of data workflows with a focus on data quality and reliability.
+   - **Dagster**: Dagster serves as our project orchestration tool, enabling the definition, scheduling, and monitoring of data workflows with a focus on data quality and reliability.
 
 End-to-end pipeline illustration:
 

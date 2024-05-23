@@ -113,7 +113,7 @@ By leveraging this data stack, users can gain valuable insights into the dynamic
 
 Data crawling represents the preliminary phase in which raw data is gathered from diverse sources. Within our infrastructure, we employ the following technology:
 
-   - **Requests**: This Python library streamlines the process of making HTTP requests, thereby enabling seamless retrieval of data from APIs and web pages.
+   - ![**Requests**](https://pypi.org/project/requests/): This Python library streamlines the process of making HTTP requests, thereby enabling seamless retrieval of data from APIs and web pages.
 
 API Endpoint: [gateway.chotot.com](https://gateway.chotot.com/v1/public/ad-listing?region_v213000&area_v2=13096&cg=1000&o=0&page=1&st=s,k&limit=20&key_param_included=true)
 
@@ -145,7 +145,7 @@ Data warehousing and storage form the foundation for storing and managing proces
  
    - **PostgreSQL**: PostgreSQL serves as our relational database management system, offering robust data storage and querying capabilities.
 
-Connect to PostgreSQL using DBeaver (username: `postgres`, password: `postgres`):
+Connect to PostgreSQL using ![DBeaver](https://dbeaver.io/) (username: `postgres`, password: `postgres`):
 
 ![dbeaver](/assets/dbeaver.png)
 

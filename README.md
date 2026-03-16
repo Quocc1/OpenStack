@@ -34,17 +34,17 @@ By leveraging this data stack, users can efficiently collect and analyze real-ti
 
 Below is a list of technologies used in this project:
 
-| Component                                        | Description                             | URL                                                                                                            |
-| ------------------------------------------------ | --------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| [Docker](https://www.docker.com/)                | Containerization                        | -                                                                                                              |
-| [Spark](https://spark.apache.org/)               | Big Data processing framework           | <http://localhost:8061> `Master` <br> <http://localhost:8062> `Worker` <br> <http://localhost:18080> `History` |
-| [Jupyter Notebook](https://jupyter.org/)         | Interactive computing and data analysis | <http://localhost:8888>                                                                                        |
-| [Rustfs](https://rustfs.com/)                    | Object storage service                  | <http://localhost:9001>                                                                                        |
-| [Iceberg](https://iceberg.apache.org/)           | Table format for large-scale data       | -                                                                                                              |
-| [Data Build Tool (DBT)](https://www.getdbt.com/) | Data transformation and modeling        | -                                                                                                              |
-| [Dagster](https://dagster.io/)                   | Data orchestrator                       | <http://localhost:3070>                                                                                        |
-| [Trino](https://trino.io/)                       | Distributed SQL query engine            | -                                                                                                              |
-| [PostgreSQL](https://www.postgresql.org/)        | OLAP database                           | -                                                                                                              |
+| Component                                        | Description                             | URL                                                                 |
+| ------------------------------------------------ | --------------------------------------- | ------------------------------------------------------------------- |
+| [Docker](https://www.docker.com/)                | Containerization                        | -                                                                   |
+| [Spark](https://spark.apache.org/)               | Big Data processing framework           | <http://localhost:8061> `Master` <http://localhost:18080> `History` |
+| [Jupyter Notebook](https://jupyter.org/)         | Interactive computing and data analysis | <http://localhost:8888>                                             |
+| [Rustfs](https://rustfs.com/)                    | Object storage service                  | <http://localhost:9001>                                             |
+| [Iceberg](https://iceberg.apache.org/)           | Table format for large-scale data       | -                                                                   |
+| [Data Build Tool (DBT)](https://www.getdbt.com/) | Data transformation and modeling        | -                                                                   |
+| [Dagster](https://dagster.io/)                   | Data orchestrator                       | <http://localhost:3070>                                             |
+| [Trino](https://trino.io/)                       | Distributed SQL query engine            | -                                                                   |
+| [PostgreSQL](https://www.postgresql.org/)        | OLAP database                           | -                                                                   |
 
 ## Prerequisites
 
@@ -52,37 +52,32 @@ Below is a list of technologies used in this project:
 
 ## Setup and Run
 
-<!-- markdownlint-disable MD029 -->
-
 1. Pull the project from the repository.
 
-```bash
-git clone https://github.com/Quocc1/OpenStack
-```
+   ```bash
+   git clone https://github.com/Quocc1/OpenStack
+   ```
 
 2. Start the Docker engine.
-
 3. CD to the project directory then spin up the docker-compose:
 
-```bash
-cd OpenStack
-```
+   ```bash
+   cd OpenStack
+   ```
 
 4. Then run:
 
-```bash
-make run
-```
+   ```bash
+   make run
+   ```
 
-**Note**: Run `make help` or refer to the [Makefile](https://github.com/Quocc1/OpenStack/blob/main/Makefile) for details on commands and execution. Use `make down` to stop the containers.
+   **Note**: Run `make help` or refer to the [Makefile](https://github.com/Quocc1/OpenStack/blob/main/Makefile) for details on commands and execution. Use `make down` to stop the containers.
 
-If you encounter issues running the Makefile on Windows, refer to [this Stack Overflow post](https://stackoverflow.com/questions/2532234/how-to-run-a-makefile-in-windows) for potential solutions.
+   If you encounter issues running the Makefile on Windows, refer to [this Stack Overflow post](https://stackoverflow.com/questions/2532234/how-to-run-a-makefile-in-windows) for potential solutions.
 
 5. Run end-to-end job in Dagster
-
-Select the **end_to_end** job and click **Materialize All**.
-
-![end_to_end](/assets/end_to_end.png)
+   Select the **end_to_end** job and click **Materialize All**.
+   ![end_to_end](/assets/end_to_end.png)
 
 ## Architecture
 

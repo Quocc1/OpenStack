@@ -1,48 +1,41 @@
 services:
-  minio:
-    image: minio/minio:RELEASE.2024-05-01T01-11-10Z
-    hostname: minio
-    container_name: minio
+  rustfs:
+    image: rustfs/rustfs:1.0.0-alpha.85
+    container_name: rustfs
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - ./data/rustfs:/data
     environment:
-      - MINIO_ROOT_USER=admin
-      - MINIO_ROOT_PASSWORD=password
-      - MINIO_DOMAIN=minio
+      - RUSTFS_ACCESS_KEY=admin
+      - RUSTFS_SECRET_KEY=password
+    command: >
+      --access-key admin --secret-key password /data
     networks:
       - docker_net
-    ports:
-      - 9001:9001
-      - 9000:9000
-    command: ["server", "/data", "--console-address", ":9001"]
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      test: [ "CMD-SHELL", "curl -sS http://localhost:9001 || exit 1" ]
       interval: 5s
       timeout: 5s
       retries: 5
 
-  mc:
-    image: minio/mc:RELEASE.2024-04-29T09-56-05Z
-    hostname: mc
-    container_name: mc
+  rustfs-init:
+    image: minio/mc
+    container_name: rustfs-init
+    entrypoint: >
+      /bin/sh -c " until mc alias set rustfs http://rustfs:9000 admin password; do
+        echo 'Waiting for RustFS...';
+        sleep 2;
+      done; mc ls rustfs/warehouse >/dev/null 2>&1 || mc mb rustfs/warehouse; "
     networks:
       - docker_net
-    environment:
-      - AWS_ACCESS_KEY_ID=admin
-      - AWS_SECRET_ACCESS_KEY=password
-      - AWS_REGION=us-east-1
-    entrypoint: >
-      /bin/sh -c "
-      until (/usr/bin/mc config host add minio http://minio:9000 admin password) do echo '...waiting...' && sleep 1; done;
-      /usr/bin/mc rm -r --force minio/warehouse;
-      /usr/bin/mc mb minio/warehouse;
-      /usr/bin/mc policy set public minio/warehouse;
-      exit 0
-      "  
     depends_on:
-      minio:
+      rustfs:
         condition: service_healthy
 
   postgres:
-    image: postgres:16
+    image: postgres:18.3
     hostname: postgres
     container_name: postgres
     environment:
@@ -54,62 +47,81 @@ services:
     networks:
       - docker_net
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 10s
       timeout: 5s
       retries: 5
 
-  spark_iceberg_dagster_dbt:
-    build: ./docker/spark_iceberg_dagster_dbt
-    container_name: all_in_one
+  spark_iceberg_kyuubi:
+    build: ./docker/spark_iceberg_kyuubi
+    container_name: spark_iceberg_kyuubi
     environment:
       - AWS_ACCESS_KEY_ID=admin
       - AWS_SECRET_ACCESS_KEY=password
       - AWS_REGION=us-east-1
     volumes:
-      - ./data/stage:/var/lib/app/stage
-      - ./data/spark/notebooks:/var/lib/app/notebooks
-      - ./code/real_estate_dagster:/var/lib/app/dagster
-      - ./code/dbt:/var/lib/app/dbt
+      - ./data/notebooks:/var/lib/app/notebooks
     ports:
-      - '8888:8888' # Spark notebook port
-      - '7077:7077' # Spark port
-      - '8061:8061' # Spark master web ui port
-      - '8062:8062' # Spark worker web ui port
-      - '10000:10000' # Thrift ODBC/JDBC port
-      - '10009:10009' # Kyuubi JDBC port
-      - '18080:18080' # Spark history web ui port
-      - '3070:3070' # Dagster web ui port
+      - '8888:8888'
+      - '7077:7077'
+      - '8061:8061'
+      - '8062:8062'
+      - '10000:10000'
+      - '10009:10009'
+      - '18080:18080'
     networks:
       docker_net:
-        aliases: 
+        aliases:
           - spark
-          - dagster
-          - dbt
-          - all_in_one
     depends_on:
-      minio:
+      rustfs:
         condition: service_healthy
       postgres:
         condition: service_healthy
 
-  trino: 
-    build: ./docker/trino
+  dagster-webserver:
+    build: ./docker/dagster_dbt
+    container_name: dagster-webserver
+    networks:
+      - docker_net
+    ports:
+      - 3000:3000
+    volumes:
+      - ./code/dagster_real_estate:/opt/dagster/dagster_home/
+      - ./code/dbt_real_estate/bronze:/opt/dagster/dagster_home/src/dagster_real_estate/defs/bronze
+      - ./code/dbt_real_estate/silver:/opt/dagster/dagster_home/src/dagster_real_estate/defs/silver
+      - ./code/dbt_real_estate/gold:/opt/dagster/dagster_home/src/dagster_real_estate/defs/gold
+    command: >
+      sh -c "pip install -e /opt/dagster/dagster_home/ && dagster-webserver -h 0.0.0.0 -p 3000"
+
+  dagster-daemon:
+    build: ./docker/dagster_dbt
+    container_name: dagster-daemon
+    networks:
+      - docker_net
+    volumes:
+      - ./code/dagster_real_estate:/opt/dagster/dagster_home/
+      - ./code/dbt_real_estate/bronze:/opt/dagster/dagster_home/src/dagster_real_estate/defs/bronze
+      - ./code/dbt_real_estate/silver:/opt/dagster/dagster_home/src/dagster_real_estate/defs/silver
+      - ./code/dbt_real_estate/gold:/opt/dagster/dagster_home/src/dagster_real_estate/defs/gold
+    command: >
+      sh -c "pip install -e /opt/dagster/dagster_home/ && dagster-daemon run"
+
+  trino:
+    image: trinodb/trino:479
     container_name: trino
     volumes:
-      - ./data/stage:/var/lib/app/stage
-      - ./docker/trino/etc:/usr/lib/trino/etc:ro
-      - ./docker/trino/catalog:/opt/trino/etc/catalog
+      - ./docker/trino/conf/catalog:/etc/trino/catalog
     ports:
-      - 8060:8080 # Trino HTTP
+      - 8060:8080
     networks:
       docker_net:
-        aliases: 
+        aliases:
           - trino
     depends_on:
       postgres:
         condition: service_healthy
-      minio:
+      rustfs:
         condition: service_healthy
     ulimits:
       nproc: 65535
@@ -118,20 +130,26 @@ services:
         hard: 40000
 
   metabase:
-    build: ./docker/metabase
+    image: metabase/metabase:v0.59.2.6
     hostname: metabase
     container_name: metabase
+    environment:
+      - MB_DB_TYPE=postgres
+      - MB_DB_DBNAME=postgres
+      - MB_DB_PORT=5432
+      - MB_DB_USER=postgres
+      - MB_DB_PASS=postgres
+      - MB_DB_HOST=postgres
+      - MB_JETTY_PORT=3030
     volumes:
       - ./docker/metabase/conf:/conf
     ports:
       - 3030:3030
     networks:
       - docker_net
-    healthcheck:
-      test: curl --fail -I http://localhost:3030/api/health || exit 1
-      interval: 15s
-      timeout: 5s
-      retries: 5
+    depends_on:
+      postgres:
+        condition: service_healthy
 
 networks:
   docker_net:

@@ -1,0 +1,22 @@
+name: "bronze"
+version: "1.0.0"
+config-version: 2
+
+profile: "bronze"
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  bronze:
+    +schema: bronze
+    +materialized: table
+    +table_type: iceberg

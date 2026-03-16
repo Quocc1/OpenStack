@@ -1,0 +1,38 @@
+bronze:
+  target: dev
+  outputs:
+    dev:
+      type: spark
+      method: thrift
+      host: spark_iceberg_kyuubi
+      port: 10009
+      schema: bronze
+      connect_retries: 5
+      connect_timeout: 5
+      retry_all: true
+
+silver:
+  target: dev
+  outputs:
+    dev:
+      type: spark
+      method: thrift
+      host: spark_iceberg_kyuubi
+      port: 10009
+      schema: silver
+      connect_retries: 5
+      connect_timeout: 5
+      retry_all: true
+
+gold:
+  target: dev
+  outputs:
+    dev:
+      type: trino
+      user: trino
+      host: trino
+      port: 8080
+      database: analytics
+      schema: gold
+      threads: 1
+      http_scheme: http

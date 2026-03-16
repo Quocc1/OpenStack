@@ -1,0 +1,12 @@
+gold:
+  target: dev
+  outputs:
+    dev:
+      type: trino
+      user: trino
+      host: trino
+      port: 8080
+      database: analytics
+      schema: gold
+      threads: 1
+      http_scheme: http

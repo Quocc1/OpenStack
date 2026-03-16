@@ -1,0 +1,12 @@
+silver:
+  target: dev
+  outputs:
+    dev:
+      type: spark
+      method: thrift
+      host: spark_iceberg_kyuubi
+      port: 10009
+      schema: silver
+      connect_retries: 5
+      connect_timeout: 5
+      retry_all: true
